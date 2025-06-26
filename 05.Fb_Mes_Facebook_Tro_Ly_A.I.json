@@ -1,0 +1,417 @@
+{
+  "name": "05. Fb_Mes_Facebook_Tro_LyA.ICNH",
+  "nodes": [
+    {
+      "parameters": {
+        "multipleMethods": true,
+        "path": "mmmmm",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        440,
+        440
+      ],
+      "id": "b7b4f96e-d2f2-4ba7-844e-c3eb53134ad7",
+      "name": "Webhook",
+      "webhookId": "ef9cdeb8-de6b-4c33-9bc0-ef5d3c004a20"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "={{ $json.query['hub.challenge'] }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.2,
+      "position": [
+        660,
+        240
+      ],
+      "id": "48918e09-61a4-4436-9989-62d9bd4621fd",
+      "name": "Respond to Webhook"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.text }}",
+        "options": {
+          "systemMessage": "=# AI AGENT PROMPT - TƯ VẤN VIÊN KHÓA HỌC AI\n\n## VAI TRÒ\nBạn là AI tư vấn viên chuyên nghiệp cho khóa học **\"Tạo trợ lý AI cá nhân hóa\"**.\n\n## NGUỒN DỮ LIỆU\n- **LUÔN** tham khảo Google Sheet trước khi trả lời\n- **CHỈ** trả lời dựa trên thông tin có trong Sheet (Cột A: Câu hỏi - Cột B: Câu trả lời)\n- **KHÔNG** được sử dụng thông tin ngoài Sheet\n\n## CÁCH XƯNG HÔ\n- Xưng: **\"em\"** \n- Gọi khách: **\"anh\"**\n- Thái độ: Thân thiện, chuyên nghiệp, tập trung vào giá trị thực tế\n\n## QUY TRÌNH TRẢ LỜI\n\n### BƯỚC 1: PHÂN TÍCH MỤC ĐÍCH\n1. **Xác định mục đích chính** của câu hỏi khách hàng:\n   - Khách hàng thực sự muốn biết gì?\n   - Intent (ý định) chính là gì?\n   - Chủ đề trung tâm mà khách quan tâm?\n\n2. **So sánh với câu hỏi trong Sheet**:\n   - Mục đích của câu hỏi khách có trùng khớp 100% với mục đích câu hỏi trong Cột A không?\n   - Intent có giống nhau hoàn toàn không?\n\n### BƯỚC 2: ĐIỀU KIỆN TRẢ LỜI\n**CHỈ TRẢ LỜI KHI:**\n- Mục đích chính của câu hỏi khách **TRÙNG KHỚP HOÀN TOÀN** với mục đích câu hỏi trong Sheet\n- Intent (ý định) **GIỐNG NHAU 100%**\n- **KHÔNG** có sai lệch về mục đích\n\n**KHÔNG TRẢ LỜI KHI:**\n- Chỉ khớp một phần thông tin\n- Mục đích khác nhau\n- Có bất kỳ sai lệch nào về intent\n\n### BƯỚC 3: FORMAT TRẢ LỜI\n\n**KHI TÌM THẤY THÔNG TIN PHƯƠNG KHỚP:**\n\n[Sao chép chính xác 100% nội dung từ Cột B]\n[Chỉ được định dạng hiển thị: chia đoạn, bullet points, xuống dòng]\n[KHÔNG thêm, bớt, thay đổi bất kỳ từ nào]\n\n**KHI KHÔNG TÌM THẤY THÔNG TIN PHỪNG KHỚP:**\n\"\"\n\n## VÍ DỤ PHÂN TÍCH MỤC ĐÍCH\n\n### ❌ TRƯỜNG HỢP SAI - KHÔNG TRẢ LỜI\n**Khách hỏi:** \"Khóa học này sở hữu trọn đời hả?\"\n- **Mục đích khách:** Hỏi về thời hạn sở hữu\n- **Intent:** Muốn biết có được sử dụng vĩnh viễn không\n\n**Câu hỏi có sẵn:** \"Học phí\"\n- **Mục đích có sẵn:** Hỏi về giá tiền\n- **Intent:** Muốn biết chi phí\n\n**Kết quả:** MỤC ĐÍCH KHÁC NHAU → KHÔNG TRẢ LỜI\n\n### ✅ TRƯỜNG HỢP ĐÚNG - ĐƯỢC TRẢ LỜI\n**Khách hỏi:** \"Giá khóa học bao nhiều tiền?\"\n- **Mục đích khách:** Hỏi về giá tiền\n- **Intent:** Muốn biết chi phí\n\n**Câu hỏi có sẵn:** \"Học phí\"\n- **Mục đích có sẵn:** Hỏi về giá tiền  \n- **Intent:** Muốn biết chi phí\n\n**Kết quả:** MỤC ĐÍCH TRÙNG KHỚP → ĐƯỢC TRẢ LỜI\n\n## QUY TẮC TUYỆT ĐỐI\n\n### CẤM NGHIÊM:\n- Thêm bất kỳ từ ngữ nào không có trong Sheet\n- Thay đổi từ ngữ gốc  \n- Giải thích thêm hoặc bình luận cá nhân\n- Tóm tắt hoặc rút gọn nội dung\n- Diễn giải lại theo cách khác\n- Thêm ví dụ mới không có trong Sheet\n- Trả lời khi mục đích không khớp 100%\n\n### CHỈ ĐƯỢC PHÉP:\n- Sao chép chính xác 100% nội dung từ Cột B\n- Định dạng trình bày (xuống dòng, bullet points)\n- Chia đoạn văn hợp lý để dễ đọc\n\n## KIỂM TRA TRƯỚC KHI TRẢ LỜI\n\n**Checklist bắt buộc:**\n- [ ] Mục đích chính của câu hỏi khách có trùng khớp hoàn toàn với mục đích câu hỏi trong Sheet?\n- [ ] Intent có giống nhau 100%?\n- [ ] Chắc chắn không có sai lệch mục đích?\n- [ ] Đã tìm đúng thông tin trong Sheet?\n- [ ] Có thay đổi bất kỳ từ nào không?\n- [ ] Có thêm thông tin không có trong Sheet không?\n\n**Nguyên tắc vàng:**\n- **KHI MỤC ĐÍCH KHÁC NHAU** → Luôn trả lời câu chuẩn\n- **CHỈ KHI MỤC ĐÍCH TRÙNG KHỚP HOÀN TOÀN** → Mới trả lời từ Sheet\n- **KHÔNG BAO GIỜ** trả lời khi chỉ khớp một phần thông tin\n\n## CÁC TRƯỜNG HỢP PHÂN BIỆT\n\n### KHÁC NHAU VỀ MỤC ĐÍCH (KHÔNG TRẢ LỜI):\n- Hỏi về thời hạn sở hữu ≠ Hỏi về học phí\n- Hỏi về chứng chỉ ≠ Hỏi về nội dung khóa học  \n- Hỏi về hình thức học ≠ Hỏi về thời gian học\n- Hỏi về hỗ trợ sau khóa học ≠ Hỏi về giảng viên\n\n### GIỐNG NHAU VỀ MỤC ĐÍCH (ĐƯỢC TRẢ LỜI):\n- \"Giá bao nhiêu?\" = \"Học phí như thế nào?\" = \"Chi phí ra sao?\"\n- \"Học mất bao lâu?\" = \"Thời gian khóa học?\" = \"Bao giờ xong?\"\n- \"Học như thế nào?\" = \"Phương pháp học?\" = \"Cách thức học?\"\n\n## KIỂM TRA CUỐI CÙNG\n\nTrước mỗi lần trả lời, tự hỏi:\n1. **\"Mục đích chính của câu hỏi khách có trùng khớp hoàn toàn với mục đích câu hỏi đã chuẩn bị sẵn không?\"**\n2. **\"Intent của khách có giống 100% với intent của câu hỏi trong Sheet không?\"**  \n3. **\"Có bất kỳ sai lệch mục đích nào không?\"**\n\n- **Nếu có BẤT KỲ câu trả lời nào là \"KHÔNG\"** → Sử dụng câu trả lời chuẩn\n- **CHỈ KHI TẤT CẢ đều \"CÓ\" và \"TRÙNG KHỚP HOÀN TOÀN\"** → Mới trả lời từ Sheet"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.9,
+      "position": [
+        1260,
+        440
+      ],
+      "id": "e00972ea-9415-4045-9803-c7df977d79f4",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "value": "gpt-4o-mini",
+          "mode": "list",
+          "cachedResultName": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        980,
+        680
+      ],
+      "id": "6047761d-125c-48e2-b1ed-4de9f62972a9",
+      "name": "OpenAI Chat Model",
+      "credentials": {
+        "openAiApi": {
+          "id": "BpciZCOgdpJ79QO1",
+          "name": "OpenAi account 23062025"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "=https://graph.facebook.com/v22.0/{{ $('User Information').item.json.recipientID}}/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer EAAO20sxSt7wBOZCfKBzfhsf0CRWFtbbd11uBeDZAf0umxs9DWNnhMw6o2SXfD94IBM0JG9uAZCGkksHZBZAMziMgMljZCZB2dPYpto4c0795pvgInYB36SUeqo0dtV3NeEnBOrxM6UjYX7LD5ZCKHj9AKrLtbmcmgxP9dcGym5NFLT5AV850TETFMrdqfgEhME2MkZCNDi9km"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"recipient\": {\n    \"id\": \"{{$('User Information').item.json.senderID}}\"\n  },\n  \"messaging_type\": \"RESPONSE\",\n  \"message\": {\n    \"text\": \"{{$json.data}}\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        440,
+        -20
+      ],
+      "id": "46e80a34-d1d7-4f87-bde3-9c1d05d854b3",
+      "name": "HTTP Request",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "jsCode": "let data = $input.first().json.output || '';\n\ndata = data.replace(/\\[([^\\]]+)\\]\\((https?:\\/\\/[^\\)]+)\\)/g, '$2');\n\n// Thoát các ký tự đặc biệt để đảm bảo JSON hợp lệ\ndata = data.replace(/\\\\/g, '\\\\\\\\'); // Thoát dấu \\\ndata = data.replace(/\"/g, '\\\\\"');   // Thoát dấu \"\ndata = data.replace(/\\n/g, '\\\\n');  // Thoát ký tự xuống dòng\nreturn {\n  data\n};"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        1980,
+        440
+      ],
+      "id": "77a5a92e-bf81-4aae-b16b-82fbe275d6b5",
+      "name": "Code"
+    },
+    {
+      "parameters": {
+        "respondWith": "text",
+        "responseBody": "EVENT_RECEIVED",
+        "options": {
+          "responseCode": 200
+        }
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.2,
+      "position": [
+        660,
+        640
+      ],
+      "id": "199123cd-3afd-4b9c-aa8b-47bcf2542fb4",
+      "name": "Respond to Webhook1"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "5ce58185-b3cd-46ef-9241-1652912c8beb",
+              "name": "senderID",
+              "value": "={{ $json.body.entry[0].messaging[0].sender.id }}",
+              "type": "string"
+            },
+            {
+              "id": "2324a350-a471-41c3-8a48-17bf25c5719b",
+              "name": "text",
+              "value": "={{ $json.body.entry[0].messaging[0].message.text }}",
+              "type": "string"
+            },
+            {
+              "id": "10ba858d-9218-4e06-bc8f-eed8d09f9f9c",
+              "name": "recipientID",
+              "value": "={{ $json.body.entry[0].messaging[0].recipient.id }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        660,
+        440
+      ],
+      "id": "ba6d06d3-8795-47d5-919f-198681a7b911",
+      "name": "User Information"
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "documentId": {
+          "__rl": true,
+          "value": "1NfWiVZVQDu_3x0RlFgYgLismmHNfZLWQssT6w3sUZdc",
+          "mode": "list",
+          "cachedResultName": "05. Facebook_Mes",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1NfWiVZVQDu_3x0RlFgYgLismmHNfZLWQssT6w3sUZdc/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 1278122531,
+          "mode": "list",
+          "cachedResultName": "mes",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1NfWiVZVQDu_3x0RlFgYgLismmHNfZLWQssT6w3sUZdc/edit#gid=1278122531"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.5,
+      "position": [
+        1460,
+        700
+      ],
+      "id": "5c6d899e-0a99-431b-b484-165e3f8bee31",
+      "name": "Product",
+      "credentials": {
+        "googleApi": {
+          "id": "UFYSZcd8CgntABwS",
+          "name": "GSA_N"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "inputText": "={{ $json.text }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "Chưa vào",
+              "description": " Áp dụng cho:\n   - Lời chào hỏi thông thường (xin chào, hello, hi, chào shop...)\n"
+            },
+            {
+              "category": "Trợ lý A.I",
+              "description": "Áp dụng cho:\n   - Hỏi về thông tin khóa học cụ thể\n   - Hỏi về học phí/giá khóa học\n   - Hỏi về thời gian học/lịch học\n   - Hỏi về nội dung chương trình học\n   - Hỏi về giảng viên/hình thức học\n   - Hỏi về chứng chỉ/cam kết sau khóa học\n   - Thể hiện ý định đăng ký/tham gia khóa học\n   - Hỏi học thế nào \n   - Hỏi hoc bao lâu/ thời gian học bao lâu hoàn thành\n   - Hỏi cách tạo hoặc tài liệu hướng dẫn\n\n\n"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1,
+      "position": [
+        880,
+        440
+      ],
+      "id": "e0e50d5e-e21e-4f34-b22c-fe4299f5771b",
+      "name": "Text Classifier"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://graph.facebook.com/v21.0/me/messages",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Authorization",
+              "value": "Bearer EAASF3EFyRdkBOylhrPrGuypi0CpCxrxDzQfLTa7e5g36vuZCiulaYZAsor3068WD2LGHZArqUnX0SrBgnmExH6IZBKgFJ3OzjYwBZCjvt6Kn5grjtNwPH7Hb1Rj5ZCj1GrRMfc9r4rdURr1yyJ8DgXqG45mZA6PkeOBvrjoy1Uha9y08CHms0PxyF3fgglwbjvZAHCClA8W6nsqe7nZCyjaXF"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"recipient\": {\n    \"id\": \"{{$('User Information').item.json.senderID}}\"\n  },\n  \"messaging_type\": \"RESPONSE\",\n  \"message\": {\n    \"text\": \"{{$json.data}}\"\n  }\n}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        2200,
+        440
+      ],
+      "id": "fc7bf318-9851-4020-96de-3db6b4890986",
+      "name": "HTTP Request2"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "6d350a9b-c6db-4ed5-ba68-a7cc19ccb696",
+              "leftValue": "={{ $json.output }}",
+              "rightValue": "\"\"",
+              "operator": {
+                "type": "string",
+                "operation": "notContains"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        1620,
+        440
+      ],
+      "id": "754317db-aba8-4464-9556-2f9e0152d3c1",
+      "name": "If"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Respond to Webhook",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "User Information",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Respond to Webhook1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          },
+          {
+            "node": "Text Classifier",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "AI Agent": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Code": {
+      "main": [
+        [
+          {
+            "node": "HTTP Request2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "User Information": {
+      "main": [
+        [
+          {
+            "node": "Text Classifier",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Product": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Text Classifier": {
+      "main": [
+        [],
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "HTTP Request": {
+      "main": [
+        []
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Code",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "d8eb23b4-19ce-40ea-96bd-bfc862925f47",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "94a383c02457267bcc44878635a0fa02b7d3206c5479bfc8890faa812e2bbd97"
+  },
+  "id": "e57NzR2jHEixG5w8",
+  "tags": []
+}
